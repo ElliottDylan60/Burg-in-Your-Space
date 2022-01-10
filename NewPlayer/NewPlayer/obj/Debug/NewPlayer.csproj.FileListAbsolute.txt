@@ -1,0 +1,56 @@
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csprojAssemblyReference.cache
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Form1.resources
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Properties.Resources.resources
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.GenerateResource.cache
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.CoreCompileInputs.cache
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.Asio.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.Core.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.Midi.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.Wasapi.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.WinForms.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.WinMM.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\System.Security.AccessControl.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\NAudio.xml
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\System.Security.AccessControl.xml
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.CopyComplete
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Information.resources
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\SharpUpdate.dll
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\SharpUpdate.pdb
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\881TheBurg.exe.config
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\881TheBurg.exe
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\bin\Debug\881TheBurg.pdb
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\881TheBurg.exe
+C:\Users\elliottdy\source\repos\NewPlayer\NewPlayer\obj\Debug\881TheBurg.pdb
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csprojAssemblyReference.cache
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Form1.resources
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Information.resources
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.Properties.Resources.resources
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.GenerateResource.cache
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.CoreCompileInputs.cache
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\881TheBurg.exe
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\881TheBurg.pdb
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\881TheBurg.exe.config
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\881TheBurg.exe
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\881TheBurg.pdb
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.Asio.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.Core.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.Midi.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.Wasapi.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.WinForms.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.WinMM.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\SharpUpdate.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\System.Security.AccessControl.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\SharpUpdate.pdb
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\NAudio.xml
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\System.Security.AccessControl.xml
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\elliottdy\Desktop\Burg in Your Space\NewPlayer\NewPlayer\obj\Debug\NewPlayer.csproj.CopyComplete
