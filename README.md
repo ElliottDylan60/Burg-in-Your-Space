@@ -4,8 +4,11 @@ as the 'Burg in Your Space'. This program is a music player that pulls music fro
 
 Some of the code in the player does not function, for instance the automatic email function no longer exists as SMTP requried passwords in plain text.
 
-## Try it Yourself
+## Problem Description
+This program was created for the intent of removing some inconsistencies with other playlist players being used in the Student Union and Recreation Center.
+Our intent was to make an easy and safe application that can play a single playlist on loop, and with sweepers, all day in the Recreation Center.
 
+## Try it Yourself
 Give the program a try! This is a preview version of the program and will only play non-copyright music.
 
 ### Using Visual Studios
@@ -16,7 +19,6 @@ Download the project and navigate to NewPlayer/Setup/Debug and launch either the
 add a shortcut to your desktop
 
 # Contact
-
 If you have any questions or comments please contact me:
 
 elliottdylan@protonmail.com
