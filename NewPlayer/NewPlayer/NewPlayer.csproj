@@ -171,11 +171,5 @@
   <ItemGroup>
     <None Include="Resources\window-restore.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\Visual Studio Projects\Main Player\881TheBurg PlayFromWebsite\SharpUpdate\SharpUpdate.csproj">
-      <Project>{cd8d2f44-fc7a-41ed-92c5-4effa42214ec}</Project>
-      <Name>SharpUpdate</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

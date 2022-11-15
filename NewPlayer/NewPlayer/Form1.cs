@@ -18,10 +18,8 @@ namespace NewPlayer
             Varaibles
          */
 
-        ServerController Controller = new ServerController("http://69.164.202.213/Music");
-        Player player = new Player("http://69.164.202.213/Music");
-        //ServerController Controller = new ServerController("http://66.243.240.209/Music/");
-        //Player player = new Player("http://66.243.240.209/Music/");
+        ServerController Controller = new ServerController("http://96.126.117.25/Music");
+        Player player = new Player("http://96.126.117.25/Music");
         /*
             Form Moving Variables
          */
@@ -45,12 +43,6 @@ namespace NewPlayer
         {
             try
             {
-                
-                SendEmail(a.Message + "\n" +
-                                "Error Code: " + ErrorCode + "\n" +
-                                "Line: " + LineNumber +
-                                a.ToString());
-
                 MessageBox.Show(a.Message + "\n" +
                                 "Error Code: " + ErrorCode + "\n" +
                                 "Line: " + LineNumber +
@@ -247,27 +239,6 @@ namespace NewPlayer
             {
                 ErrorMessage(err, "1");
             }
-        }
-        /*
-            Send Email Notification
-         */
-        private void SendEmail(string Error)
-        {
-            /*
-            try
-            {
-                var smtpClient = new SmtpClient("smtp.gmail.com")
-                {
-                    Port = 587,
-                    Credentials = new System.Net.NetworkCredential("fatalerrorservernotification@gmail.com", "Elliott050703*"),
-                    EnableSsl = true,
-                };
-                smtpClient.Send("fatalerrorservernotification@gmail.com", "elliottdy@cwu.edu", "Player Died", Error);
-            }
-            catch (Exception err) {
-                MessageBox.Show(err.ToString());
-            }
-            */
         }
     }
 }

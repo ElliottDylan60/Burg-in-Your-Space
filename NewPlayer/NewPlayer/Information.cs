@@ -10,16 +10,14 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharpUpdate;
 
 namespace NewPlayer
 {
-    public partial class Information : Form, ISharpUpdatable
+    public partial class Information : Form
     {
         /*
             Update Information
          */
-        private SharpUpdater s;
         private Uri xmlLocation;
 
         public string ApplicationName
@@ -61,8 +59,6 @@ namespace NewPlayer
             InitializeComponent();
             this.lbVersion.Text = "Version " + this.ApplicationAssembly.GetName().Version.ToString();
             this.xmlLocation = new Uri("http://69.164.202.213/update/update.xml");
-
-            s = new SharpUpdater(this);
         }
 
         /*
@@ -156,8 +152,6 @@ namespace NewPlayer
                     //return;
                 }
             }
-            Console.WriteLine("Checking for update");
-            s.DoUpdate();
         }
     }
 }

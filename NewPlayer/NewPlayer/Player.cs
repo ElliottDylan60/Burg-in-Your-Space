@@ -50,10 +50,6 @@ namespace NewPlayer
             try
             {
                 
-                SendEmail(a.Message + "\n" +
-                                "Error Code: " + ErrorCode + "\n" +
-                                "Line: " + LineNumber +
-                                a.ToString());
 
                 MessageBox.Show(a.Message + "\n" +
                                 "Error Code: " + ErrorCode + "\n" +
@@ -311,26 +307,6 @@ namespace NewPlayer
             if (wo.PlaybackState == PlaybackState.Stopped)
                 return true;
             return false;
-        }
-        /*
-            Send Email Notification
-         */
-        private void SendEmail(string Error) {
-            /*
-            try
-            {
-                var smtpClient = new SmtpClient("smtp.gmail.com")
-                {
-                    Port = 587,
-                    Credentials = new NetworkCredential("fatalerrorservernotification@gmail.com", "Elliott050703*"),
-                    EnableSsl = true,
-                };
-                smtpClient.Send("fatalerrorservernotification@gmail.com", "elliottdy@cwu.edu", "Player Died", Error);
-            }
-            catch (Exception err) {
-                MessageBox.Show(err.ToString());
-            }
-            */
         }
     }
 }
