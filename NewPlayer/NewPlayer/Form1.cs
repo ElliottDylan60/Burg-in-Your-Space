@@ -14,23 +14,22 @@ namespace NewPlayer
 {
     public partial class Form1 : Form
     {
-        /*
-            Varaibles
-         */
-
+        /// <summary>
+        /// Player and Server 
+        /// </summary>
         ServerController Controller = new ServerController("http://96.126.117.25/Music");
         Player player = new Player("http://96.126.117.25/Music");
-        /*
-            Form Moving Variables
-         */
+        /// <summary>
+        /// Move form
+        /// </summary>
         private bool mouseDown;
         private Point lastLocation;
-        /*
-            Playlist Varaibles
-         */
+        /// <summary>
+        /// Playlist Information
+        /// </summary>
         List<string> AllPlaylists = new List<string>();
-        List<SongProperties> Playlist = new List<SongProperties>();
         public static List<SongProperties> ShuffledPlaylist = new List<SongProperties>();
+        
         /*
             Error Messages
          */
@@ -58,12 +57,12 @@ namespace NewPlayer
         {
             player.Changed += ChangedEventHandler;
             InitializeComponent();
+            initialize();
         }
         /*
-            Load
+            Initialize
          */
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void initialize() {
             try
             {
                 // Get Playlists From Web Server
@@ -72,7 +71,6 @@ namespace NewPlayer
                 foreach (string Playlist in AllPlaylists)
                 {
                     PlaylistDropDown.Items.Add(Playlist);
-                    Console.WriteLine("Playlist "+Playlist);
                 }
 
                 // Set First Playlist
@@ -80,13 +78,12 @@ namespace NewPlayer
                 // Start lLog
 
             }
-            catch (Exception err) {
+            catch (Exception err)
+            {
                 ErrorMessage(err, "1");
             }
         }
-        /*
-            Drag and Drop
-         */
+        #region Move Form
         private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -128,9 +125,8 @@ namespace NewPlayer
                 ErrorMessage(a, "480 \nCould Not Move Window");
             }
         }
-        /*
-            Buttons
-         */
+        #endregion
+        #region FormButtons
         private void btnInfo_Click(object sender, EventArgs e)
         {
             Information info = new Information();
@@ -188,9 +184,6 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
-        /*
-            Playlist changed
-         */
         /// <summary>
         /// New Playlist Selected, Get Songs from Selected Playlist
         /// </summary>
@@ -200,30 +193,34 @@ namespace NewPlayer
             {
                 player.ClearPlaylists();
                 // Gets Songs From location and passes to player
-                Playlist = Controller.GetPlaylist(PlaylistDropDown.SelectedItem.ToString());
-                player.setSweepers(PlaylistDropDown.SelectedItem.ToString());
-                player.setPlaylist(Playlist);
+
+                player.Initialize(PlaylistDropDown.SelectedItem.ToString());
                 updateUserInterface(player.getCurrentIndex());
-                
+
             }
-            catch (Exception err) {
+            catch (Exception err)
+            {
                 ErrorMessage(err, "1");
             }
         }
-        /*
-            Update User Interface
-         */
+        #endregion
+        #region HelperFucntions
         /// <summary>
         /// Update User interface with content from given index
         /// </summary>
         /// <param name="index">index location of Shuffled Playlist</param>
-        private void updateUserInterface(int index) {
+        private void updateUserInterface(int index)
+        {
             try
             {
                 txtTitle.Text = ShuffledPlaylist[index].Title;
                 txtArtist.Text = "Unknown";
             }
-            catch (Exception err) {
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (Exception err)
+            {
                 ErrorMessage(err, "1");
             }
         }
@@ -240,5 +237,7 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
+        #endregion
+
     }
 }

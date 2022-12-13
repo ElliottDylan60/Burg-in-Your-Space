@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 
@@ -19,10 +15,7 @@ namespace NewPlayer
         private List<SongProperties> Playlist = new List<SongProperties>();
         private List<SongProperties> ShuffledPlaylist = new List<SongProperties>();
         private List<SongProperties> Sweepers = new List<SongProperties>();
-        //private List<SongProperties> ShuffledSweepers = new List<SongProperties>();
 
-
-        private List<string> SweepersFolder = new List<string>();
         private MediaFoundationReader mf;
         private WaveOutEvent wo;
         private int CurrentIndex = 0;
@@ -67,6 +60,7 @@ namespace NewPlayer
         public Player(string ServerLocation) {
             try
             {
+                Controller = new ServerController(ServerLocation);
                 this.ServerLocation = ServerLocation;
                 wo = new WaveOutEvent();
                 wo.PlaybackStopped += new EventHandler<StoppedEventArgs>(StoppedEventHandler);
@@ -75,6 +69,12 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
 
+        }
+        public void Initialize(string PlaylistName) {
+            //Controller = new ServerController(ServerLocation + "/" + PlaylistName);
+            setSweepers(PlaylistName);
+            setPlaylist(Controller.GetPlaylist(PlaylistName));
+            
         }
         private void StoppedEventHandler(object sender, EventArgs e)
         {
@@ -129,7 +129,6 @@ namespace NewPlayer
             }
             catch (Exception err) {
                 Next();
-                SendEmail("NOT Fatal, Player Still running \n"+err.ToString());
             }
         }
         public void Previous() {
@@ -148,10 +147,11 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
-        /*
-            Setters
-         */
-        public void setPlaylist(List<SongProperties> Playlist) {
+        /// <summary>
+        /// Shuffles playlist and initializes first media
+        /// </summary>
+        /// <param name="Playlist"></param>
+        private void setPlaylist(List<SongProperties> Playlist) {
             try
             {
                 // Keep Current Playlist
@@ -169,21 +169,35 @@ namespace NewPlayer
                 wo.Play();
                 Switching = false;
             }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Playlist is Empty, please select a new one");
+            }
             catch (Exception err) {
                 ErrorMessage(err, "1");
             }
         }
-        public void setSweepers(string PlaylistLocation) {
+        /// <summary>
+        /// Adds sweepers to playlist
+        /// </summary>
+        /// <param name="PlaylistLocation">playlist location</param>
+        private void setSweepers(string PlaylistLocation) {
             try
             {
-                //ClearPlaylists();
-                Controller = new ServerController(ServerLocation +"/"+ PlaylistLocation);
-                SweepersFolder = Controller.GetSweepersFolder();
-                Sweepers = Controller.GetPlaylist(SweepersFolder[0]);
+                string SweepersFolder = Controller.GetSubDirectory(PlaylistLocation);
+                if (!SweepersFolder.Equals("Does Not Exist"))
+                {
+                    Sweepers = Controller.GetPlaylist(PlaylistLocation + "/" + SweepersFolder);
+                }
+                else {
+                    Sweepers = new List<SongProperties>();
+                }
             }
-            catch (Exception err) {
+            catch (Exception err)
+            {
                 ErrorMessage(err, "1");
             }
+            
         }
         /*
             Playlist Controls
@@ -212,22 +226,6 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
-        /*
-        private void ShuffleSweepers() {
-            List<SongProperties> temp = Sweepers.ToList();
-            ShuffledSweepers.Clear();
-
-            int n = temp.Count;
-            Random rand = new Random();
-            while (n > 0) {
-                n--;
-                int k = rand.Next(n + 1);
-                ShuffledSweepers.Add(temp[k]);
-                temp.RemoveAt(k);
-            }
-            AddSweepers();
-        }
-        */
         /// <summary>
         /// Add sweepers to shuffled playlist
         /// </summary>
@@ -238,6 +236,9 @@ namespace NewPlayer
                 int insertIndex = 0;
                 int totalInsert = Sweepers.Count;
                 int step = 4;
+                if (totalInsert < 1) {
+                    return;
+                }
                 List<SongProperties> temp = ShuffledPlaylist.ToList(); // We need a temp because you cannot modify list when using it in foreach statement
                 SongProperties insertSong;
                 foreach (SongProperties song in ShuffledPlaylist)
@@ -261,6 +262,7 @@ namespace NewPlayer
                     ShuffledPlaylist.Add(song);
                 }
             }
+           
             catch (Exception err) {
                 ErrorMessage(err, "1");
             }
@@ -273,8 +275,6 @@ namespace NewPlayer
             {
                 CurrentIndex = 0;
                 this.ShuffledPlaylist.Clear();
-                this.SweepersFolder.Clear();
-                this.Sweepers.Clear();
                 this.Playlist.Clear();
             }
             catch (Exception err) {

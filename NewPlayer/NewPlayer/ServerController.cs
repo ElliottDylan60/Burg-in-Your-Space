@@ -19,18 +19,12 @@ namespace NewPlayer
 {
     class ServerController
     {
-        string ServerAddress;
-        List<string> AllPlaylists = new List<string>();
-        List<string> Sweepers = new List<string>();
-        string CurrentPlaylist;
-        List<SongProperties> playlist = new List<SongProperties>();
-
+        string ServerAddress; // http://96.126.117.25/Music
+        string currentPlaylist; // Long Playlist
+        string sweepersFolder; // Sweepers
         public ServerController(string ServerAddress) {
             this.ServerAddress = ServerAddress;
         }
-        /*
-            Error Messages
-         */
         /// <summary>
         /// Format all Error Messages to look alike
         /// </summary>
@@ -50,38 +44,21 @@ namespace NewPlayer
                 MessageBox.Show(e.Message);
             }
         }
+        #region playlistInformation
         /// <summary>
-        /// Return list of all playlists in server address
+        /// get playlists in current server
         /// </summary>
-        /// <returns></returns>
         public List<string> GetAllPlaylists() {
             try
             {
-                BackgroundWorker FindPlaylists = new BackgroundWorker(); // Create Background Worker
-                FindPlaylists.DoWork += new DoWorkEventHandler(this.GetAllPlaylists_DoWork); // Assign Do Work event
-                FindPlaylists.RunWorkerCompleted += new RunWorkerCompletedEventHandler(this.GetAllPlaylists_RunWorkerComplete);
-                FindPlaylists.RunWorkerAsync();
-                while (FindPlaylists.IsBusy)// wait for background worker to stop
-                {
-                    Application.DoEvents();
-                }
-                return AllPlaylists;
-            }
-            catch (Exception err) {
-                ErrorMessage(err, "1");
-                return null;
-            }
-        }
-        private void GetAllPlaylists_DoWork(object sender, DoWorkEventArgs e) {
-            try
-            {
+                List<string> AllPlaylists = new List<string>();
+
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServerAddress);
-                
+
                 var cache = new CredentialCache();
-                cache.Add(new Uri(ServerAddress), "Basic", new NetworkCredential("admin", "9Automation9"));
                 request.Credentials = cache;
                 request.PreAuthenticate = true;
-                
+
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -114,55 +91,34 @@ namespace NewPlayer
                         }
                     }
                 }
-            }
-            catch (Exception err) {
-                ErrorMessage(err, "1");
-            }
-        }
-        private void GetAllPlaylists_RunWorkerComplete(object sender, RunWorkerCompletedEventArgs e) { 
-        
-        }
-        /// <summary>
-        /// Returns List of All songs in given Playlist
-        /// </summary>
-        /// <returns></returns>
-        public List<SongProperties> GetPlaylist(string playlist) {
-            try
-            {
-                this.CurrentPlaylist = playlist;
-                BackgroundWorker GetPlaylist = new BackgroundWorker();
-                GetPlaylist.DoWork += new DoWorkEventHandler(BackgroundGetPlaylist_DoWork);
-                GetPlaylist.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundGetPlaylist_RunWorkerComplete);
-                GetPlaylist.RunWorkerAsync();
-                while (GetPlaylist.IsBusy)
-                {
-                    Application.DoEvents();
-                }
-                return this.playlist;
+                return AllPlaylists;
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
                 return null;
             }
         }
-
-        private void BackgroundGetPlaylist_DoWork(object sender, DoWorkEventArgs e) {
+        
+        /// <summary>
+        /// get files in specific directory
+        /// </summary>
+        public List<SongProperties> GetPlaylist(string directory) {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServerAddress + "/" + CurrentPlaylist);
-                
+                List<SongProperties> playlist = new List<SongProperties>();
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServerAddress + "/" + directory);
+
                 var cache = new CredentialCache();
-                cache.Add(new Uri(ServerAddress), "Basic", new NetworkCredential("admin", "9Automation9"));
                 request.Credentials = cache;
                 request.PreAuthenticate = true;
-                
+
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         string html = reader.ReadToEnd();
 
-                        Regex regex = new Regex(GetDirectoryListingRegexForUrl(ServerAddress + "/" + CurrentPlaylist));
+                        Regex regex = new Regex(GetDirectoryListingRegexForUrl(ServerAddress + "/" + directory));
                         MatchCollection matches = regex.Matches(html);
                         if (matches.Count > 0)
                         {
@@ -175,7 +131,10 @@ namespace NewPlayer
                                     if (!match.Groups["name"].ToString().EndsWith("/"))
                                     {
 
-                                        playlist.Add(new SongProperties { Title = System.Net.WebUtility.HtmlDecode(match.Groups["name"].ToString()), index = index++, URL = ServerAddress + "/" + CurrentPlaylist + "/" + System.Net.WebUtility.HtmlDecode(match.Groups["name"].ToString()) });
+                                        playlist.Add(new SongProperties { 
+                                            Title = System.Net.WebUtility.HtmlDecode(match.Groups["name"].ToString()), 
+                                            index = index++, 
+                                            URL = ServerAddress + "/" + directory + "/" + System.Net.WebUtility.HtmlDecode(match.Groups["name"].ToString()) });
                                     }
 
                                 }
@@ -198,43 +157,29 @@ namespace NewPlayer
                         }
                     }
                 }
-            }
-            catch (Exception err) {
-                ErrorMessage(err, "1");
-            }
-        }
-        private void BackgroundGetPlaylist_RunWorkerComplete(object sender, RunWorkerCompletedEventArgs e) { 
-        }
-
-        public List<string> GetSweepersFolder() {
-            try
-            {
-                BackgroundWorker FindSweepers = new BackgroundWorker(); // Create Background Worker
-                FindSweepers.DoWork += new DoWorkEventHandler(this.GetSweepers_DoWork); // Assign Do Work event
-                FindSweepers.RunWorkerAsync();
-                while (FindSweepers.IsBusy)// wait for background worker to stop
-                {
-                    Application.DoEvents();
-                }
-                return Sweepers;
+                return playlist;
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
                 return null;
             }
         }
-        private void GetSweepers_DoWork(object sender, DoWorkEventArgs e)
-        {
+
+        /// <summary>
+        /// Get sweepers in current playlist
+        /// </summary>
+        public string GetSubDirectory(string directory) {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServerAddress);
-                
+                List<string> Sweepers = new List<string>();
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(ServerAddress + "/" + directory);
+
                 var cache = new CredentialCache();
-                cache.Add(new Uri(ServerAddress), "Basic", new NetworkCredential("admin", "9Automation9"));
                 request.Credentials = cache;
                 request.PreAuthenticate = true;
-                
-                Console.WriteLine(ServerAddress);
+
+
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -260,14 +205,20 @@ namespace NewPlayer
 
                             }
                         }
-
                     }
                 }
+
+                if (Sweepers.Count > 0) {
+                    return Sweepers[0];
+                }
+                return "Does Not Exist";
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
+                return "Does Not Exist";
             }
         }
+        #endregion
         /// <summary>
         /// reads all files in given directory
         /// </summary>
@@ -275,13 +226,15 @@ namespace NewPlayer
         /// <returns>returns name of file/song</returns>
         private string GetDirectoryListingRegexForUrl(string url)
         {
+            /*
+                I didn't write this code, i got it from here:
+                https://social.msdn.microsoft.com/Forums/vstudio/en-US/a7432290-c643-4d84-84df-61ce4c63a563/get-files-list-from-url?forum=csharpgeneral
+            */
             try
             {
-                if (url.Equals(url))
-                {
-                    return "<a href=\".*\">(?<name>.*)</a>";
-                }
-                return "Could Not Connect To External Server";
+
+                return "<a href=\".*\">(?<name>.*)</a>";
+
             }
             catch (NotSupportedException e)
             {
