@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net.Mail;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewPlayer
@@ -24,11 +18,6 @@ namespace NewPlayer
         /// </summary>
         private bool mouseDown;
         private Point lastLocation;
-        /// <summary>
-        /// Playlist Information
-        /// </summary>
-        List<string> AllPlaylists = new List<string>();
-        public static List<SongProperties> ShuffledPlaylist = new List<SongProperties>();
         
         /*
             Error Messages
@@ -53,22 +42,23 @@ namespace NewPlayer
                 MessageBox.Show(e.Message);
             }
         }
+        /// <summary>
+        /// Initialize important elements before form oad
+        /// </summary>
         public Form1()
         {
             player.Changed += ChangedEventHandler;
             InitializeComponent();
             initialize();
         }
-        /*
-            Initialize
-         */
+        /// <summary>
+        /// Initialize imporant elements before form load
+        /// </summary>
         private void initialize() {
             try
             {
                 // Get Playlists From Web Server
-
-                AllPlaylists = Controller.GetAllPlaylists();
-                foreach (string Playlist in AllPlaylists)
+                foreach (string Playlist in Controller.GetAllPlaylists())
                 {
                     PlaylistDropDown.Items.Add(Playlist);
                 }
@@ -84,6 +74,9 @@ namespace NewPlayer
             }
         }
         #region Move Form
+        /// <summary>
+        /// When user presses mouse down
+        /// </summary>
         private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -96,6 +89,9 @@ namespace NewPlayer
                 ErrorMessage(a, "480 \nCould Not Move Window");
             }
         }
+        /// <summary>
+        /// When user mouse is up
+        /// </summary>
         private void Main_MouseUp(object sender, MouseEventArgs e)
         {
             try
@@ -107,6 +103,9 @@ namespace NewPlayer
                 ErrorMessage(a, "480 \nCould Not Move Window");
             }
         }
+        /// <summary>
+        /// When user moves mouse
+        /// </summary>
         private void Main_MouseMove(object sender, MouseEventArgs e)
         {
             try
@@ -127,29 +126,39 @@ namespace NewPlayer
         }
         #endregion
         #region FormButtons
+        /// <summary>
+        /// Special update information
+        /// </summary>
         private void btnInfo_Click(object sender, EventArgs e)
         {
             Information info = new Information();
             info.Show();
         }
-
+        /// <summary>
+        /// Close the form
+        /// </summary>
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Play previous song in playlist
+        /// </summary>
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             try
             {
                 player.Previous();
-                updateUserInterface(player.getCurrentIndex());
+                updateUserInterface();
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
             }
         }
-
+        /// <summary>
+        /// If playing     -> pause
+        /// If paused      -> play
+        /// </summary>
         private void btnPlayPause_Click(object sender, EventArgs e)
         {
             try
@@ -164,20 +173,22 @@ namespace NewPlayer
                     btnPlayPause.Image = bmp;
                 }
                 player.PlayPause();
-                updateUserInterface(player.getCurrentIndex());
+                updateUserInterface();
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
             }
         }
-
+        /// <summary>
+        /// Play next song in playlist
+        /// </summary>
         private void btnNext_Click(object sender, EventArgs e)
         {
             try
             {
 
                 player.Next();
-                updateUserInterface(player.getCurrentIndex());
+                updateUserInterface();
                 
             }
             catch (Exception err) {
@@ -195,7 +206,7 @@ namespace NewPlayer
                 // Gets Songs From location and passes to player
 
                 player.Initialize(PlaylistDropDown.SelectedItem.ToString());
-                updateUserInterface(player.getCurrentIndex());
+                updateUserInterface();
 
             }
             catch (Exception err)
@@ -209,12 +220,12 @@ namespace NewPlayer
         /// Update User interface with content from given index
         /// </summary>
         /// <param name="index">index location of Shuffled Playlist</param>
-        private void updateUserInterface(int index)
+        private void updateUserInterface()
         {
             try
             {
-                txtTitle.Text = ShuffledPlaylist[index].Title;
-                toolTip1.SetToolTip(txtTitle, ShuffledPlaylist[index].Title);
+                txtTitle.Text = player.getMediaTitle();
+                toolTip1.SetToolTip(txtTitle, player.getMediaTitle());
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -224,13 +235,19 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
+        /// <summary>
+        /// On Song Change
+        /// 
+        /// Update Current playling Title
+        /// </summary>
         public void ChangedEventHandler(object sender, EventArgs e)
         {
             try
             {
-                //txtTitle.Text = ShuffledPlaylist[player.getCurrentIndex()].Title;
-                //txtArtist.Text = "Unknown";
-                this.txtTitle.BeginInvoke((MethodInvoker)delegate () { this.txtTitle.Text = ShuffledPlaylist[player.getCurrentIndex()].Title; });
+                this.Invoke((MethodInvoker)delegate {
+                    txtTitle.Text = player.getMediaTitle();
+                    toolTip1.SetToolTip(txtTitle, player.getMediaTitle());
+                });
             }
             catch (Exception err)
             {

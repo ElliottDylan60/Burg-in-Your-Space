@@ -22,7 +22,6 @@ namespace NewPlayer
         /*
             Server Variables
          */
-        private string ServerLocation;
         ServerController Controller;
         /*
             Events
@@ -57,7 +56,6 @@ namespace NewPlayer
             try
             {
                 Controller = new ServerController(ServerLocation);
-                this.ServerLocation = ServerLocation;
                 wo = new WaveOutEvent();
                 wo.PlaybackStopped += new EventHandler<StoppedEventArgs>(StoppedEventHandler);
             }
@@ -165,8 +163,6 @@ namespace NewPlayer
 
                 // Refresh Playlist
                 RefreshPlaylist();
-                Form1.ShuffledPlaylist.Clear();
-                Form1.ShuffledPlaylist = ShuffledPlaylist.ToList();
 
                 // Play First Index
                 mf = new MediaFoundationReader(ShuffledPlaylist[CurrentIndex].URL);
@@ -289,8 +285,8 @@ namespace NewPlayer
         }
         #endregion
         #region Getters
-        public int getCurrentIndex() {
-            return this.CurrentIndex;
+        public string getMediaTitle() {
+            return ShuffledPlaylist[CurrentIndex].Title;
         }
         #endregion
         #region checkers
