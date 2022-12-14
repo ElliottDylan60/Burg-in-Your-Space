@@ -19,9 +19,7 @@ namespace NewPlayer
 {
     class ServerController
     {
-        string ServerAddress; // http://96.126.117.25/Music
-        string currentPlaylist; // Long Playlist
-        string sweepersFolder; // Sweepers
+        string ServerAddress;
         public ServerController(string ServerAddress) {
             this.ServerAddress = ServerAddress;
         }
@@ -236,7 +234,7 @@ namespace NewPlayer
                 return "<a href=\".*\">(?<name>.*)</a>";
 
             }
-            catch (NotSupportedException e)
+            catch (NotSupportedException)
             {
                 return "Could Not Connect To External Server";
             }

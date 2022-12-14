@@ -19,7 +19,6 @@ namespace NewPlayer
         private MediaFoundationReader mf;
         private WaveOutEvent wo;
         private int CurrentIndex = 0;
-        private bool Switching = false;
         /*
             Server Variables
          */
@@ -54,9 +53,6 @@ namespace NewPlayer
                 MessageBox.Show(e.Message);
             }
         }
-        /*
-            Checking Variables
-         */
         public Player(string ServerLocation) {
             try
             {
@@ -71,7 +67,6 @@ namespace NewPlayer
 
         }
         public void Initialize(string PlaylistName) {
-            //Controller = new ServerController(ServerLocation + "/" + PlaylistName);
             setSweepers(PlaylistName);
             setPlaylist(Controller.GetPlaylist(PlaylistName));
             
@@ -79,12 +74,12 @@ namespace NewPlayer
         private void StoppedEventHandler(object sender, EventArgs e)
         {
             Next();
-            
-            Console.WriteLine(sender.ToString());
         }
-        /*
-            Controls
-         */
+        #region playerControls
+        /// <summary>
+        /// If playing     -> pause
+        /// If paused      -> play
+        /// </summary>
         public void PlayPause() {
             try
             {
@@ -107,6 +102,9 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
+        /// <summary>
+        /// Play next song
+        /// </summary>
         public void Next() {
             
             try
@@ -127,35 +125,41 @@ namespace NewPlayer
                 wo.Play();
                 Changed?.Invoke(this, EventArgs.Empty);
             }
-            catch (Exception err) {
+            catch (Exception) {
                 Next();
             }
         }
+        /// <summary>
+        /// Play previous song
+        /// </summary>
         public void Previous() {
             try
             {
-                Switching = true;
+                
                 wo.Stop();
                 if ((CurrentIndex - 1) < 0) 
                     CurrentIndex = ShuffledPlaylist.Count() - 1;
                 mf = new MediaFoundationReader(ShuffledPlaylist[--CurrentIndex].URL);
                 wo.Init(mf);
                 wo.Play();
-                Switching = false;
+                
             }
             catch (Exception err) {
                 ErrorMessage(err, "1");
             }
         }
+        #endregion
+        #region Playlistcontrols
         /// <summary>
         /// Shuffles playlist and initializes first media
         /// </summary>
         /// <param name="Playlist"></param>
-        private void setPlaylist(List<SongProperties> Playlist) {
+        private void setPlaylist(List<SongProperties> Playlist)
+        {
             try
             {
                 // Keep Current Playlist
-                Switching = true;
+                
                 wo.Stop();
                 this.Playlist = Playlist;
 
@@ -163,17 +167,19 @@ namespace NewPlayer
                 RefreshPlaylist();
                 Form1.ShuffledPlaylist.Clear();
                 Form1.ShuffledPlaylist = ShuffledPlaylist.ToList();
+
                 // Play First Index
                 mf = new MediaFoundationReader(ShuffledPlaylist[CurrentIndex].URL);
                 wo.Init(mf);
                 wo.Play();
-                Switching = false;
+                
             }
             catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("Playlist is Empty, please select a new one");
             }
-            catch (Exception err) {
+            catch (Exception err)
+            {
                 ErrorMessage(err, "1");
             }
         }
@@ -181,7 +187,8 @@ namespace NewPlayer
         /// Adds sweepers to playlist
         /// </summary>
         /// <param name="PlaylistLocation">playlist location</param>
-        private void setSweepers(string PlaylistLocation) {
+        private void setSweepers(string PlaylistLocation)
+        {
             try
             {
                 string SweepersFolder = Controller.GetSubDirectory(PlaylistLocation);
@@ -189,7 +196,8 @@ namespace NewPlayer
                 {
                     Sweepers = Controller.GetPlaylist(PlaylistLocation + "/" + SweepersFolder);
                 }
-                else {
+                else
+                {
                     Sweepers = new List<SongProperties>();
                 }
             }
@@ -197,11 +205,8 @@ namespace NewPlayer
             {
                 ErrorMessage(err, "1");
             }
-            
+
         }
-        /*
-            Playlist Controls
-         */
         /// <summary>
         /// Reset and Shuffle new Playlist
         /// </summary>
@@ -267,6 +272,7 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
+
         /// <summary>
         /// Clear all lists as new ones have been selected
         /// </summary>
@@ -281,15 +287,13 @@ namespace NewPlayer
                 ErrorMessage(err, "1");
             }
         }
-        /*
-            Getters
-         */
+        #endregion
+        #region Getters
         public int getCurrentIndex() {
             return this.CurrentIndex;
         }
-        /*
-            Checkers
-         */
+        #endregion
+        #region checkers
         public bool isPlaying()
         {
             if(wo.PlaybackState == PlaybackState.Playing)
@@ -308,5 +312,6 @@ namespace NewPlayer
                 return true;
             return false;
         }
+        #endregion
     }
 }

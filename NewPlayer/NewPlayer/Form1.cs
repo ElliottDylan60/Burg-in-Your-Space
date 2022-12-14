@@ -214,7 +214,7 @@ namespace NewPlayer
             try
             {
                 txtTitle.Text = ShuffledPlaylist[index].Title;
-                txtArtist.Text = "Unknown";
+                toolTip1.SetToolTip(txtTitle, ShuffledPlaylist[index].Title);
             }
             catch (ArgumentOutOfRangeException)
             {

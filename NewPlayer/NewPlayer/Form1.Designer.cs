@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtTitle = new System.Windows.Forms.Label();
-            this.txtArtist = new System.Windows.Forms.Label();
             this.PlaylistDropDown = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new ePOSOne.btnProduct.Button_WOC();
             this.btnInfo = new ePOSOne.btnProduct.Button_WOC();
             this.btnPlayPause = new ePOSOne.btnProduct.Button_WOC();
-            this.circularPicture1 = new _881TheBurg.CircularPicture();
             this.btnNext = new ePOSOne.btnProduct.Button_WOC();
             this.btnPrevious = new ePOSOne.btnProduct.Button_WOC();
-            ((System.ComponentModel.ISupportInitialize)(this.circularPicture1)).BeginInit();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTitle
@@ -47,22 +48,10 @@
             this.txtTitle.ForeColor = System.Drawing.Color.White;
             this.txtTitle.Location = new System.Drawing.Point(15, 192);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(213, 31);
+            this.txtTitle.Size = new System.Drawing.Size(213, 67);
             this.txtTitle.TabIndex = 17;
-            this.txtTitle.Text = "{Title}";
+            this.txtTitle.Text = "{FileName}";
             this.txtTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtArtist
-            // 
-            this.txtArtist.AutoEllipsis = true;
-            this.txtArtist.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtArtist.ForeColor = System.Drawing.Color.White;
-            this.txtArtist.Location = new System.Drawing.Point(12, 223);
-            this.txtArtist.Name = "txtArtist";
-            this.txtArtist.Size = new System.Drawing.Size(216, 21);
-            this.txtArtist.TabIndex = 18;
-            this.txtArtist.Text = "{Artist}";
-            this.txtArtist.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PlaylistDropDown
             // 
@@ -73,6 +62,17 @@
             this.PlaylistDropDown.Size = new System.Drawing.Size(216, 21);
             this.PlaylistDropDown.TabIndex = 19;
             this.PlaylistDropDown.SelectedIndexChanged += new System.EventHandler(this.PlaylistDropDown_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::NewPlayer.Properties.Resources.Default;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.InitialImage = global::NewPlayer.Properties.Resources.Default;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(214, 132);
+            this.pictureBox1.TabIndex = 22;
+            this.pictureBox1.TabStop = false;
             // 
             // btnClose
             // 
@@ -134,16 +134,6 @@
             this.btnPlayPause.UseVisualStyleBackColor = false;
             this.btnPlayPause.Click += new System.EventHandler(this.btnPlayPause_Click);
             // 
-            // circularPicture1
-            // 
-            this.circularPicture1.BackgroundImage = global::NewPlayer.Properties.Resources.Default;
-            this.circularPicture1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.circularPicture1.Location = new System.Drawing.Point(12, 42);
-            this.circularPicture1.Name = "circularPicture1";
-            this.circularPicture1.Size = new System.Drawing.Size(216, 176);
-            this.circularPicture1.TabIndex = 15;
-            this.circularPicture1.TabStop = false;
-            // 
             // btnNext
             // 
             this.btnNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -190,13 +180,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(240, 315);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.PlaylistDropDown);
-            this.Controls.Add(this.txtArtist);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.btnPlayPause);
-            this.Controls.Add(this.circularPicture1);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -207,7 +196,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.circularPicture1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,13 +205,13 @@
 
         private ePOSOne.btnProduct.Button_WOC btnPrevious;
         private ePOSOne.btnProduct.Button_WOC btnNext;
-        private _881TheBurg.CircularPicture circularPicture1;
         private ePOSOne.btnProduct.Button_WOC btnPlayPause;
         private System.Windows.Forms.ComboBox PlaylistDropDown;
         private ePOSOne.btnProduct.Button_WOC btnInfo;
         private ePOSOne.btnProduct.Button_WOC btnClose;
-        public System.Windows.Forms.Label txtArtist;
         public System.Windows.Forms.Label txtTitle;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

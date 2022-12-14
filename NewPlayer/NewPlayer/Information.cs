@@ -16,40 +16,6 @@ namespace NewPlayer
     public partial class Information : Form
     {
         /*
-            Update Information
-         */
-        private Uri xmlLocation;
-
-        public string ApplicationName
-        {
-            get { return "881TheBurg"; }
-        }
-
-        public string ApplicationId
-        {
-            get { return "881TheBurg"; }
-        }
-
-        public Assembly ApplicationAssembly
-        {
-            get { return Assembly.GetEntryAssembly(); }
-        }
-
-        public Icon ApplicationIcon
-        {
-            get { return this.Icon; }
-        }
-
-        public Uri UpdateXmlLocaion
-        {
-            get { return new Uri("http://69.164.202.213/update/update.xml"); }
-        }
-
-        public Form Context
-        {
-            get { return this; }
-        }
-        /*
             Form Moving Variables
          */
         private bool mouseDown;
@@ -57,8 +23,6 @@ namespace NewPlayer
         public Information()
         {
             InitializeComponent();
-            this.lbVersion.Text = "Version " + this.ApplicationAssembly.GetName().Version.ToString();
-            this.xmlLocation = new Uri("http://69.164.202.213/update/update.xml");
         }
 
         /*
@@ -84,13 +48,7 @@ namespace NewPlayer
                 MessageBox.Show(e.Message);
             }
         }
-        private void Information_Load(object sender, EventArgs e)
-        {
-
-        }
-        /*
-            Drag and Drop
-         */
+        #region MoveForm
         private void Main_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -132,26 +90,12 @@ namespace NewPlayer
                 ErrorMessage(a, "480 \nCould Not Move Window");
             }
         }
-        /*
-            Buttons
-         */
-
+        #endregion
+        #region Buttons
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void btn_Update_Click(object sender, EventArgs e)
-        {
-            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
-            {
-                WindowsPrincipal principal = new WindowsPrincipal(identity);
-                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
-                {
-                    //MessageBox.Show("Admin Privileges Required to Update");
-                    //return;
-                }
-            }
-        }
+        #endregion
     }
 }
