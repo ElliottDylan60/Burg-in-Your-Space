@@ -79,11 +79,11 @@
     <Compile Include="Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Burg In Your Space.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Burg In Your Space.Designer.cs">
+      <DependentUpon>Burg In Your Space.cs</DependentUpon>
     </Compile>
     <Compile Include="Information.cs">
       <SubType>Form</SubType>
@@ -96,8 +96,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerController.cs" />
     <Compile Include="SongProperties.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Burg In Your Space.resx">
+      <DependentUpon>Burg In Your Space.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Information.resx">
       <DependentUpon>Information.cs</DependentUpon>

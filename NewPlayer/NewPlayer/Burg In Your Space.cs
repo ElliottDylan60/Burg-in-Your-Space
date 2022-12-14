@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace NewPlayer
 {
-    public partial class Form1 : Form
+    public partial class BurgInYourSpace : Form
     {
         /// <summary>
         /// Player and Server 
@@ -45,7 +45,7 @@ namespace NewPlayer
         /// <summary>
         /// Initialize important elements before form oad
         /// </summary>
-        public Form1()
+        public BurgInYourSpace()
         {
             player.Changed += ChangedEventHandler;
             InitializeComponent();

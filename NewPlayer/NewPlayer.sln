@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30517.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewPlayer", "NewPlayer\NewPlayer.csproj", "{597AFE2C-2786-4ADF-824C-4801B17D1140}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burg In Your Space", "NewPlayer\Burg In Your Space.csproj", "{597AFE2C-2786-4ADF-824C-4801B17D1140}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
